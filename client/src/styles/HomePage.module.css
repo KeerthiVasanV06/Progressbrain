@@ -1,0 +1,866 @@
+/* ====== PLANET OF LANA INSPIRED ANIMATIONS ====== */
+
+@keyframes atmosphericShift {
+  0%, 100% { 
+    background-position: 0% 20%; 
+  }
+  50% { 
+    background-position: 100% 80%; 
+  }
+}
+
+@keyframes smoothFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes windSway {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(2px) rotate(0.5deg);
+  }
+}
+
+@keyframes leafFall {
+  0% {
+    transform: translateY(-20px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh) translateX(80px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes parallaxCloud {
+  0% {
+    transform: translateX(-15%);
+  }
+  100% {
+    transform: translateX(115%);
+  }
+}
+
+@keyframes gentleGlow {
+  0%, 100% {
+    opacity: 0.7;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.9;
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes fadeInSmooth {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtleBreath {
+  0%, 100% { 
+    transform: scale(1);
+  }
+  50% { 
+    transform: scale(1.015);
+  }
+}
+
+@keyframes shimmerOverlay {
+  0%, 100% { opacity: 0.05; }
+  50% { opacity: 0.12; }
+}
+
+@keyframes cinematicZoom {
+  0% {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ====== HAND-PAINTED WATERCOLOR BACKGROUND ====== */
+
+:global(body) {
+  margin: 0;
+  padding: 0;
+  font-family: 'Trebuchet MS', 'Segoe UI', -apple-system, sans-serif;
+  background: 
+    linear-gradient(180deg, 
+      #87CEEB 0%,
+      #B4E4FF 15%,
+      #FFD4A3 40%,
+      #FFC2D1 60%,
+      #E6B8FF 80%,
+      #B8A4E8 100%
+    );
+  background-size: 100% 300%;
+  animation: atmosphericShift 90s ease-in-out infinite;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Soft painterly texture overlay */
+:global(body)::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998;
+  mix-blend-mode: overlay;
+}
+
+/* Atmospheric depth gradient */
+:global(body)::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 70%, rgba(184, 228, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 200, 220, 0.12) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 0;
+  animation: gentleGlow 8s ease-in-out infinite;
+}
+
+/* ====== PARALLAX CLOUDS ====== */
+
+:global(body) .cloudLayer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ====== CONTAINER - CINEMATIC FRAME ====== */
+
+.container {
+  position: relative;
+  max-width: 46rem;
+  margin: 3.5rem auto;
+  padding: 3.5rem;
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(255, 226, 252, 0.88) 60%,
+      rgba(255, 245, 222, 0.9) 90%
+    );
+  backdrop-filter: blur(12px) saturate(1.2);
+  border-radius: 1.25rem;
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  animation: 
+    cinematicZoom 1.2s cubic-bezier(0.22, 1, 0.36, 1) both,
+    smoothFloat 4s ease-in-out infinite;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 10;
+  will-change: transform;
+  animation-delay: 0s, 1.2s;
+}
+
+/* Watercolor paper texture */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.04'/%3E%3C/svg%3E");
+  border-radius: 1.25rem;
+  pointer-events: none;
+  z-index: -1;
+  mix-blend-mode: multiply;
+}
+
+/* Soft inner glow */
+.container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 85%;
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  border-radius: 1rem;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.container:hover {
+  transform: translateY(-12px);
+  box-shadow: 
+    0 20px 64px rgba(0, 0, 0, 0.16),
+    0 8px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 3px rgba(159, 255, 167, 0.9);
+}
+
+.container:hover::after {
+  opacity: 1;
+}
+
+.container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ====== TITLE - CINEMATIC TYPOGRAPHY ====== */
+
+.title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(165deg, 
+    #5B7FA3 0%, 
+    #8B6FA3 35%,
+    #C47BA3 70%,
+    #E89BA3 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInSmooth 1.2s ease-out;
+  letter-spacing: -1px;
+  position: relative;
+  filter: drop-shadow(0 2px 8px rgba(91, 127, 163, 0.15));
+  font-family: 'Trebuchet MS', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(91, 127, 163, 0.4) 20%,
+    rgba(139, 111, 163, 0.6) 50%,
+    rgba(196, 123, 163, 0.4) 80%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+/* ====== SUBTITLE - NARRATIVE TEXT ====== */
+
+.subtitle {
+  font-size: 1.3rem;
+  color: #6B7A8F;
+  margin-bottom: 2.5rem;
+  animation: fadeInSmooth 1.4s ease-out 0.2s both;
+  font-weight: 400;
+  line-height: 1.75;
+  font-style: normal;
+  letter-spacing: 0.3px;
+}
+
+/* ====== GREETING - WARM WELCOME ====== */
+
+.greeting {
+  animation: fadeInSmooth 1.6s ease-out 0.3s both;
+  margin-bottom: 2rem;
+}
+
+.greeting p {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #8B6FA3;
+  margin: 0.75rem 0;
+  display: inline-block;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: drop-shadow(0 2px 6px rgba(139, 111, 163, 0.15));
+  animation: windSway 3s ease-in-out infinite;
+}
+
+.greeting p:hover {
+  transform: scale(1.05) translateY(-2px);
+  color: #C47BA3;
+  filter: drop-shadow(0 4px 12px rgba(196, 123, 163, 0.25));
+}
+
+/* ====== STREAK - ACHIEVEMENT BADGE ====== */
+
+.streakContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 2.5rem 0;
+  animation: fadeInSmooth 1.8s ease-out 0.4s both;
+}
+
+.streakCard {
+  background: linear-gradient(135deg, 
+    rgba(139, 111, 163, 0.12) 0%,
+    rgba(196, 123, 163, 0.08) 100%
+  );
+  border: 3px solid rgba(139, 111, 163, 0.25);
+  border-radius: 2rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 
+    0 6px 24px rgba(139, 111, 163, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 2px rgba(139, 111, 163, 0.1);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.streakCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.3) 50%, 
+    transparent 100%
+  );
+  animation: shimmerOverlay 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.streakCard:hover {
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 
+    0 12px 40px rgba(139, 111, 163, 0.25),
+    inset 0 1px 3px rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, 
+    rgba(139, 111, 163, 0.18) 0%,
+    rgba(196, 123, 163, 0.12) 100%
+  );
+  border-color: rgba(139, 111, 163, 0.4);
+}
+
+.streakHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.fireIcon,
+.starIcon {
+  font-size: 2rem;
+  animation: subtleBreath 4s ease-in-out infinite;
+}
+
+.streakTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #8B6FA3;
+  margin: 0;
+  font-family: 'Trebuchet MS', 'Monaco', monospace;
+}
+
+.streakContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.streakValue {
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: #8B6FA3;
+  text-shadow: 
+    2px 2px 0px rgba(255, 255, 255, 0.6),
+    0 0 16px rgba(139, 111, 163, 0.2);
+  animation: subtleBreath 4s ease-in-out infinite;
+  margin: 0;
+}
+
+.streakLabel {
+  font-size: 0.95rem;
+  color: #8B6FA3;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.streakLoading {
+  font-size: 1.5rem;
+  color: #8B6FA3;
+  margin: 1rem 0;
+  animation: subtleBreath 1s ease-in-out infinite;
+}
+
+.streak {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #8B6FA3;
+  font-family: 'Trebuchet MS', 'Monaco', monospace;
+  margin: 2.5rem 0;
+  animation: 
+    fadeInSmooth 1.8s ease-out 0.4s both,
+    subtleBreath 5s ease-in-out infinite;
+  animation-delay: 0.4s, 2.2s;
+  display: inline-block;
+  padding: 1.75rem 3rem;
+  background: 
+    linear-gradient(135deg, 
+      rgba(139, 111, 163, 0.12) 0%,
+      rgba(196, 123, 163, 0.08) 100%
+    );
+  border-radius: 2rem;
+  border: 3px solid rgba(139, 111, 163, 0.25);
+  position: relative;
+  box-shadow: 
+    0 6px 24px rgba(139, 111, 163, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 2px rgba(139, 111, 163, 0.1);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* Shimmer effect */
+.streak::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.3) 50%, 
+    transparent 100%
+  );
+  animation: shimmerOverlay 6s ease-in-out infinite;
+}
+
+.streak:hover {
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 
+    0 12px 40px rgba(139, 111, 163, 0.25),
+    inset 0 1px 3px rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, 
+    rgba(139, 111, 163, 0.18) 0%,
+    rgba(196, 123, 163, 0.12) 100%
+  );
+  border-color: rgba(139, 111, 163, 0.4);
+}
+
+/* ====== STREAK COMPONENTS ====== */
+
+.streakLabel,
+.streakValue,
+.streakDays {
+  display: inline-block;
+  margin: 0 0.4rem;
+}
+
+.streakDays {
+  font-size: 1.1rem;
+  color: #8B6FA3;
+  opacity: 0.8;
+}
+
+/* ====== LOADING DOTS ====== */
+
+.loadingDots {
+  display: inline-block;
+  animation: gentleGlow 2s ease-in-out infinite;
+  color: #8B6FA3;
+}
+
+/* ====== ERROR MESSAGE ====== */
+
+.errorMessage {
+  color: #A66B7A;
+  font-weight: 500;
+  padding: 1.25rem 2rem;
+  background: rgba(196, 123, 163, 0.08);
+  border: 2px solid rgba(166, 107, 122, 0.25);
+  border-radius: 1rem;
+  margin: 1.5rem 0;
+  animation: fadeInSmooth 0.8s ease-out;
+  font-style: normal;
+  box-shadow: 0 4px 16px rgba(166, 107, 122, 0.1);
+}
+
+/* ====== BUTTON GROUP ====== */
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  animation: fadeInSmooth 2s ease-out 0.6s both;
+}
+
+/* ====== BUTTONS - CINEMATIC INTERACTION ====== */
+
+.button {
+  position: relative;
+  padding: 1.15rem 2.75rem;
+  border-radius: 2.5rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  background: linear-gradient(135deg, #8B6FA3 0%, #A686B3 100%);
+  color: white;
+  text-decoration: none;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  display: inline-block;
+  box-shadow: 
+    0 8px 24px rgba(139, 111, 163, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  letter-spacing: 0.3px;
+}
+
+/* Light sweep effect */
+.button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: scale(0.5);
+}
+
+.button:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.button:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 16px 40px rgba(139, 111, 163, 0.35),
+    inset 0 1px 3px rgba(255, 255, 255, 0.6);
+  filter: brightness(1.15);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.button:active {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 8px 24px rgba(139, 111, 163, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+/* ====== BUTTON ICONS ====== */
+
+.buttonIcon {
+  display: inline-block;
+  margin-right: 0.6rem;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.button:hover .buttonIcon {
+  transform: translateX(4px) scale(1.1);
+}
+
+/* ====== BUTTON VARIANTS ====== */
+
+.button.primary {
+  background: linear-gradient(135deg, #8B6FA3 0%, #9F7DB3 100%);
+}
+
+.button.secondary {
+  background: linear-gradient(135deg, #C47BA3 0%, #D88FB3 100%);
+}
+
+/* ====== ENCOURAGEMENT - NARRATIVE TEXT ====== */
+
+.encouragement {
+  margin-top: 3rem;
+  font-size: 1.15rem;
+  color: #6B7A8F;
+  font-weight: 400;
+  animation: fadeInSmooth 2.2s ease-out 0.8s both;
+  padding: 1.75rem 2.25rem;
+  border-radius: 1.25rem;
+  background: rgba(219, 253, 197, 0.5);
+  border: 2px solid rgba(139, 111, 163, 0.15);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  font-style: normal;
+  line-height: 1.85;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.04),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.2px;
+}
+
+.encouragement:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.02) translateY(-2px);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 3px rgba(255, 255, 255, 0.9);
+}
+
+/* ====== FLOATING LEAVES / PARTICLES ====== */
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.particle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  animation: leafFall 28s linear infinite;
+  opacity: 0;
+}
+
+.particle::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(139, 163, 111, 0.8) 0%,
+    rgba(163, 139, 111, 0.7) 40%,
+    rgba(196, 163, 123, 0.6) 100%
+  );
+  border-radius: 0% 100% 0% 100%;
+  transform: rotate(45deg);
+}
+
+.particle::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 60%;
+  background: linear-gradient(180deg, 
+    rgba(139, 111, 83, 0.6) 0%,
+    transparent 100%
+  );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.particle:nth-child(1) {
+  left: 8%;
+  width: 16px;
+  height: 16px;
+  animation-delay: 0s;
+  animation-duration: 32s;
+}
+
+.particle:nth-child(2) {
+  left: 28%;
+  width: 14px;
+  height: 14px;
+  animation-delay: 6s;
+  animation-duration: 35s;
+}
+
+.particle:nth-child(2)::before {
+  background: linear-gradient(135deg, 
+    rgba(163, 139, 111, 0.8) 0%,
+    rgba(196, 163, 123, 0.7) 40%,
+    rgba(196, 143, 103, 0.6) 100%
+  );
+}
+
+.particle:nth-child(3) {
+  left: 48%;
+  width: 18px;
+  height: 18px;
+  animation-delay: 12s;
+  animation-duration: 38s;
+}
+
+.particle:nth-child(3)::before {
+  background: linear-gradient(135deg, 
+    rgba(163, 119, 91, 0.8) 0%,
+    rgba(196, 143, 123, 0.7) 40%,
+    rgba(176, 133, 103, 0.6) 100%
+  );
+}
+
+.particle:nth-child(4) {
+  left: 68%;
+  width: 15px;
+  height: 15px;
+  animation-delay: 18s;
+  animation-duration: 34s;
+}
+
+.particle:nth-child(4)::before {
+  background: linear-gradient(135deg, 
+    rgba(139, 163, 111, 0.75) 0%,
+    rgba(159, 173, 121, 0.65) 40%,
+    rgba(186, 183, 143, 0.55) 100%
+  );
+}
+
+.particle:nth-child(5) {
+  left: 88%;
+  width: 17px;
+  height: 17px;
+  animation-delay: 24s;
+  animation-duration: 36s;
+}
+
+.particle:nth-child(5)::before {
+  background: linear-gradient(135deg, 
+    rgba(196, 143, 103, 0.8) 0%,
+    rgba(206, 163, 123, 0.7) 40%,
+    rgba(196, 173, 143, 0.6) 100%
+  );
+}
+
+/* ====== ATMOSPHERIC CLOUDS ====== */
+
+.particles::before,
+.particles::after {
+  content: '';
+  position: absolute;
+  width: 180px;
+  height: 60px;
+  background: rgba(221, 98, 98, 0.25);
+  border-radius: 50%;
+  filter: blur(30px);
+  animation: parallaxCloud 120s linear infinite;
+}
+
+.particles::before {
+  top: 12%;
+  left: -180px;
+  animation-delay: 0s;
+  animation-duration: 100s;
+}
+
+.particles::after {
+  top: 68%;
+  left: -180px;
+  animation-delay: 50s;
+  animation-duration: 140s;
+  width: 220px;
+  height: 70px;
+}
+
+/* ====== RESPONSIVE DESIGN ====== */
+
+@media (max-width: 768px) {
+  .container {
+    margin: 2rem 1.5rem;
+    padding: 2.5rem 2rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .streak {
+    font-size: 1.6rem;
+    padding: 1.25rem 2rem;
+  }
+
+  .streakValue {
+    font-size: 2.5rem;
+  }
+
+  .button {
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+  }
+
+  .buttonGroup {
+    gap: 1.25rem;
+  }
+
+  .encouragement {
+    font-size: 1.05rem;
+    padding: 1.5rem 1.75rem;
+  }
+}
+
+/* ====== ACCESSIBILITY & PERFORMANCE ====== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .particle,
+  .particles::before,
+  .particles::after {
+    display: none;
+  }
+  
+  .container {
+    animation: fadeInSmooth 0.01ms !important;
+  }
+}
